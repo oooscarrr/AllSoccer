@@ -1,34 +1,35 @@
-const mongoose = require('mongoose'),
-	URLSlugs = require('mongoose-url-slugs'),
-  passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+// URLSlugs = require('mongoose-url-slugs'),
+// passportLocalMongoose = require('passport-local-mongoose');
 
 
-const User = new mongoose.Schema({
-  // username, password
-  lists:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
-});
-
-const Item = new mongoose.Schema({
-	name: {type: String, required: true},
-	quantity: {type: Number, min: 1, required: true},
-	checked: {type: Boolean, default: false, required: true}
-}, {
-	_id: true
-});
-
-
-const List = new mongoose.Schema({
-  user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+const Player = new mongoose.Schema({
+  username: {type: String, required: true},
+  //password
   name: {type: String, required: true},
-	createdAt: {type: Date, required: true},
-	items: [Item]
+  team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+}, );
+
+const Team = new mongoose.Schema({
+	name: {type: String, required: true},
+	manager: {type: String, required: true},
+	players: [{type: Object}],
+	createdAt: {type: Date}
 });
 
 
-User.plugin(passportLocalMongoose);
-List.plugin(URLSlugs('name'));
+const Match = new mongoose.Schema({
+  teams: [{type: mongoose.Schema.Types.ObjectId, ref:'Team'}],
+  dateTime: {type: Date},
+  location: {type: String},
+  status: {type: String, required: true}
+});
 
-mongoose.model('User', User);
-mongoose.model('List', List);
-mongoose.model('Item', Item);
+
+// Player.plugin(passportLocalMongoose);
+// List.plugin(URLSlugs('name'));
+
+mongoose.model('Player', Player);
+mongoose.model('Team', Team);
+mongoose.model('Match', Match);
 mongoose.connect('mongodb://localhost/grocerydb');
