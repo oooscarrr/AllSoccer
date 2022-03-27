@@ -64,12 +64,21 @@ An Example Match:
 /home - home page
 ![home page](documentation/HomePage.png)
 
+/login - page for logging in existing or creating new accounts
+![login](documentation/LoginSignup.png)
+
+/search - page for searching teams and players in the database
+![search](documentation/SearchTeamPlayer.png)
+
 /playerProfile - page for a player's information
 ![player profile](documentation/PlayerProfile.png)
 
-/login - page for logging in existing or creating new accounts
+/teamProfile - page for a team's information
+![team profile](documentation/TeamProfile.png)
 
-![login](documentation/Login_Signup.png)
+/createTeam - page for creating a new team
+![create team](documentation/CreateTeam.png)
+
 
 ## Site map
 
