@@ -13,15 +13,15 @@ const Player = new mongoose.Schema({
 const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
-	players: [{type: Object}],
-	createdAt: {type: Date}
+	players: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}],
+	createdAt: Date
 });
 
 
 const Match = new mongoose.Schema({
-  teams: [{type: mongoose.Schema.Types.ObjectId, ref:'Team'}],
-  dateTime: {type: Date},
-  location: {type: String},
+  teams: [String],
+  dateTime: Date,
+  location: String,
   status: {type: String, required: true}
 });
 

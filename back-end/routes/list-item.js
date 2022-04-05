@@ -1,14 +1,14 @@
 const express = require('express'),
-	router = express.Router(),
-	mongoose = require('mongoose'),
-	List = mongoose.model('List'),
-	Item = mongoose.model('Item');
+router = express.Router(),
+mongoose = require('mongoose'),
+Player = mongoose.model('Player');
+// Team = mongoose.model('Team');
 
 router.post('/create', (req, res) => {
-	const {listSlug, name, quantity}  = req.body;
+	const {listSlug, name, quantity} = req.body;
 	const listItem = {name, quantity};
 
-	List.findOneAndUpdate({slug:listSlug}, {$push: {items: listItem}}, (err, list, count) => {
+	Player.findOneAndUpdate({slug:listSlug}, {$push: {items: listItem}}, (err) => {
     console.log(err);
 		res.redirect(`/list/${listSlug}`);
 	});
@@ -17,7 +17,7 @@ router.post('/create', (req, res) => {
 router.post('/check', (req, res) => {
 	const {listSlug, items} = req.body;
 
-	List.findOne({slug:listSlug}, (err, list, count) => {
+	Player.findOne({slug:listSlug}, (err, list) => {
     console.log(`items: ${items}, list: ${list}`);
 		for (let i = 0; i < list.items.length; i++) {
       console.log(list.items[i]);
@@ -26,7 +26,7 @@ router.post('/check', (req, res) => {
 			}
 		}
 		list.markModified('items');
-		list.save((err, savedList, count) => {
+		list.save((err) => {
       console.log(err);
 			res.redirect(`/list/${listSlug}`);
 		});
