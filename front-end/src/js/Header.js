@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 const Header = (props) => {
     return <h1>This is header</h1>

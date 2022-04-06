@@ -1,9 +1,10 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./js/Home";
 import Header from "./js/Header";
+import PlayerProfile from "./js/PlayerProfile";
 
 
 const App = (props) => {
@@ -15,6 +16,7 @@ const App = (props) => {
         <Routes>
           {/*home page*/}
           <Route path="/" element={<Home title="Home | All Soccer"/>}/>
+          <Route path="/playerProfile" element={<PlayerProfile title="Player Profile | All Soccer"/>}/>
         </Routes>
       </Router>
     </div>
