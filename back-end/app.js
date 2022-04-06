@@ -49,9 +49,9 @@ require('./db');
 const express = require("express");
 const app = express();
   
-app.post("/post", (req, res) => {
+app.get("/", (req, res) => {
   console.log("Connected to React");
-  res.redirect("/");
+  res.render('<p>This is back-end</p>');
 });
   
 const PORT = process.env.PORT || 8080;
