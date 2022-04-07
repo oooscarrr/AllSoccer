@@ -6,17 +6,17 @@ const PlayerProfile = (props) => {
         document.title = props.title || "";
     }, [props.title]);
 
-    const [username, setUsername] = useState('');
-    const getUsername = async () => {
-        const response = await axios('/playerProfile');
-        setUsername(response.data);
-    }
+    const user = props.user, setUser = props.setUser;
+    // const getUsername = async () => {
+    //     const response = await axios('/api/playerProfile');
+    //     setUsername(response.data);
+    // }
 
-    useEffect(() => {
-        getUsername();
-    },[username]);
+    // useEffect(() => {
+    //     getUsername();
+    // },[username]);
 
-    return <h1>{username}</h1>
+    return <h1>{user.username}</h1>
 }
 
 export default PlayerProfile;

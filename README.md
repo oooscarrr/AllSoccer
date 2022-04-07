@@ -96,14 +96,14 @@ An Example Match:
 
 ## Research Topics
 
-* (6 points) (not decided yet) React.js
-    * I'm thinking about building up front end with React. Might change my mind in the next milestone with further workload evaluation.
-* (3 points) Unit tests with mocha
+* (6 points) React.js
+    * Building up front end with React.
+* (3 points) Passport Authentication.
 
 9 points total out of 8 required points
 
 
-## [Link to Initial Main Project File](app.js) 
+## [Link to Initial Main Project File](back-end/app.js) 
 
 
 ## Annotations / References Used

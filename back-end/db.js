@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
-// URLSlugs = require('mongoose-url-slugs'),
-// passportLocalMongoose = require('passport-local-mongoose');
+// const URLSlugs = require('mongoose-url-slugs');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 
 const Player = new mongoose.Schema({
   username: {type: String, required: true},
-  //password
-  name: {type: String, required: true},
-  team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+  password: String,
+  name: String,
+  team: String,
 }, );
 
 const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
-	players: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}],
+	players: [String],
 	createdAt: Date
 });
 
@@ -26,10 +26,23 @@ const Match = new mongoose.Schema({
 });
 
 
-// Player.plugin(passportLocalMongoose);
+Player.plugin(passportLocalMongoose);
 // List.plugin(URLSlugs('name'));
 
 mongoose.model('Player', Player);
 mongoose.model('Team', Team);
 mongoose.model('Match', Match);
-mongoose.connect('mongodb://localhost/grocerydb');
+
+
+const mongooseOpts = {
+  useNewUrlParser: true,  
+  useUnifiedTopology: true
+};
+
+mongoose.connect('mongodb://localhost/allsoccer', mongooseOpts, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('connected to database'); 
+  }
+});
