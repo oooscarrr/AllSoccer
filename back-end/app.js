@@ -16,6 +16,7 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, "../front-end/build")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
