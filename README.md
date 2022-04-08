@@ -1,7 +1,5 @@
 # All Soccer
 
-## Deployment Incomplete
-Still trying to solve the problem. Please check out locally. 'npm start' in both front-end and back-end
 
 ## Overview
 
