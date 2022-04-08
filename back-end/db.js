@@ -40,7 +40,8 @@ const mongooseOpts = {
   useUnifiedTopology: true
 };
 
-const dbURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@allsoccercluster.scscx.mongodb.net/allSoccer?retryWrites=true&w=majority`;
+// const dbURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@allsoccercluster.scscx.mongodb.net/allSoccer?retryWrites=true&w=majority`;
+const dbURI = 'mongodb+srv://oscarhaha:gsTCQlfLSHc4vpq8@allsoccercluster.scscx.mongodb.net/allSoccer?retryWrites=true&w=majority';
 mongoose.connect(dbURI, mongooseOpts, (err) => {
   if (err) {
     console.log(err);
