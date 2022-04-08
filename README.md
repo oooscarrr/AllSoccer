@@ -1,5 +1,8 @@
 # All Soccer
 
+## Deployment Incomplete
+Still trying to solve the problem. Please check out locally. 'npm start' in both front-end and back-end
+
 ## Overview
 
 Soccer enthusiats in NYC usually engage in the sport by playing pick-up games with random others(lower level), friendly matches between teams(medium level), and organized tournaments(higher level). Currently, there is no consistently operating website exclusive for amateur soccer teams to connect with each other.
