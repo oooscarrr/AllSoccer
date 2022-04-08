@@ -70,30 +70,20 @@ const LoginRegister = (props) => {
         <div>
             <h1>Login to Existing Account</h1>
             <form onSubmit={handleLogin}>
-                <label>    
-                    <input type="text" placeholder={'Username'} name="username"/>
-                </label>
-                <label>    
-                    <input type="password" placeholder={'Password'} name="password"/>
-                </label>
+                <input type="text" placeholder={'Username'} name="username"/>
+                <input type="password" placeholder={'Password'} name="password"/>
                 <input type="submit" value="Log In" />
             </form>
 
             <h1>Create New Player</h1>
             <form onSubmit={handleRegister}>
-                <label>
-                    <input type="text" placeholder={'Username'} name="username" />
-                </label>
-                <label>
-                    <input type="password" placeholder={'Password'} name="password" />
-                </label>
-                <label>
-                    <input type="password" placeholder={'Confirm Password'} name="confirmPassword" />
-                </label>
+                <input type="text" placeholder={'Username'} name="username" />
+                <input type="password" placeholder={'Password'} name="password" />
+                <input type="password" placeholder={'Confirm Password'} name="confirmPassword" />
                 <input type="submit" value="Register" />
             </form>
         </div>
-    )
+    );
 }
 
 export default LoginRegister;

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 // const URLSlugs = require('mongoose-url-slugs');
 const passportLocalMongoose = require('passport-local-mongoose');
+require("dotenv").config({ silent: true });
 
 
 const Player = new mongoose.Schema({
   username: {type: String, required: true},
   password: String,
-  name: String,
+  realname: String,
   team: String,
 }, );
 
@@ -39,7 +40,8 @@ const mongooseOpts = {
   useUnifiedTopology: true
 };
 
-mongoose.connect('mongodb://localhost/allsoccer', mongooseOpts, (err) => {
+const dbURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@allsoccercluster.scscx.mongodb.net/allSoccer?retryWrites=true&w=majority`;
+mongoose.connect(dbURI, mongooseOpts, (err) => {
   if (err) {
     console.log(err);
   } else {

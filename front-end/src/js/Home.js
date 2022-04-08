@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { NavLink } from 'react-router-dom';
 const axios = require('axios');
 
 const Home = (props) => {
@@ -8,7 +9,7 @@ const Home = (props) => {
     
     const [gibberish, setGibberish] = useState('');
     const getGibberish = async () => {
-        const response = await axios('/home');
+        const response = await axios('/api/home');
         setGibberish(response.data);
     }
 
@@ -16,7 +17,14 @@ const Home = (props) => {
         getGibberish();
     },[gibberish]);
 
-    return <p>{gibberish}</p>
+    return (
+        <div>
+            <p>{gibberish}</p>
+            <NavLink to='/loginRegister'>Login or Register</NavLink>
+            <p> </p>
+            <NavLink to='/playerProfile'>Player Profile</NavLink>
+        </div>
+    );
 }
 
 export default Home;

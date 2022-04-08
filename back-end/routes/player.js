@@ -4,25 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Player = mongoose.model('Player');
 
-// router.post('/register', (req, res) => {
-//     Player.register(new Player({username: req.body.username}), req.body.password, function(err, user){
-//         if(err) {
-//             res.status(500).json({status: false, message: err});
-//         }
-//         else {
-//             user.save(function(err){
-//                 if (err) {
-//                     res.status(500).json({status: false, message: err});
-//                 }
-//                 else {
-//                     passport.authenticate('local')(req, res, function(){
-//                         res.status(200).json({status: true});
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// });
+
 router.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user) {
         if (user) {
@@ -39,17 +21,30 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res) {
-    Player.register(new Player({ username: req.body.username }),
+    Player.register(new Player({ username: req.body.username, realname: '' }),
         req.body.password, function (err, user) {
             if (err) {
                 res.json({ status: false, message: err.toString() });
             }
             else {
                 passport.authenticate('local')(req, res, function () {
-                    res.json({ status: true, theUser: user });
+                    res.json({ status: true, user: user });
                 });
             }
         });
+});
+
+router.post('/setRealName', async (req, res) => {
+    const theUser = await Player.findOneAndUpdate({username: req.body.username}, {realname: req.body.realname}, {new: true}).catch((err) => {
+        if (err) {
+            return res.json({status: false, message: err.toString()});
+        }
+    });
+    res.json({status: true, user: theUser});
+    // const theUser = await Player.findOne({username: req.body.username});
+    // theUser.realname = req.body.realname;
+    // await theUser.save();
+    // res.json({status: true, user: theUser});
 });
 
 router.get("/playerProfile", (req, res) => {

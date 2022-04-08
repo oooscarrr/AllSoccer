@@ -33,7 +33,7 @@ const playerRoutes = require('./routes/player');
 app.use('/api', playerRoutes);
 
 
-app.get("/home", (req, res) => {
+app.get("/api/home", (req, res) => {
   res.send('This is homepage');
 });
 

@@ -19,8 +19,8 @@ const App = (props) => {
         <Routes>
           {/*home page*/}
           <Route path="/" element={<Home title="Home | All Soccer"/>}/>
-          <Route path="/playerProfile" element={<PlayerProfile title="Player Profile | All Soccer"/>} user={user} setUser={setUser}/>
-          <Route path="/loginRegister" element={<LoginRegister title="Login/Register | All Soccer"/>} user={user} setUser={setUser}/>
+          <Route path="/playerProfile" element={<PlayerProfile title="Player Profile | All Soccer" user={user} setUser={setUser}/>}/>
+          <Route path="/loginRegister" element={<LoginRegister title="Login/Register | All Soccer" user={user} setUser={setUser}/>}/>
         </Routes>
       </Router>
     </div>
