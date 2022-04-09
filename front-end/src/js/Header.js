@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = (props) => {
-    return <h1>This is header</h1>
+    return <h1>All Soccer</h1>
 }
 
 export default Header;

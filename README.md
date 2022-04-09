@@ -1,5 +1,7 @@
 # All Soccer
 
+## Milestone 2
+You can register, login and change your real name.
 
 ## Overview
 

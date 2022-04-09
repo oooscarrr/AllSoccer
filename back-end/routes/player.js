@@ -35,16 +35,13 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/setRealName', async (req, res) => {
-    const theUser = await Player.findOneAndUpdate({username: req.body.username}, {realname: req.body.realname}, {new: true}).catch((err) => {
-        if (err) {
-            return res.json({status: false, message: err.toString()});
-        }
-    });
-    res.json({status: true, user: theUser});
-    // const theUser = await Player.findOne({username: req.body.username});
-    // theUser.realname = req.body.realname;
-    // await theUser.save();
-    // res.json({status: true, user: theUser});
+    const theUser = await Player.findOneAndUpdate({username: req.body.username}, {realname: req.body.realname}, {new: true});
+    if (theUser) {
+        res.json({status: true, user: theUser});
+    }
+    else {
+        res.json({status: false, message: 'error!'});
+    }
 });
 
 router.get("/playerProfile", (req, res) => {

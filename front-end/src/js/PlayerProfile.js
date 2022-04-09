@@ -10,7 +10,7 @@ const PlayerProfile = (props) => {
 
     const setRealName = async e => {
         e.preventDefault();
-        const newName = e.realname;
+        const newName = e.target.realname.value;
         const response = await axios({
             method: "post",
             url: "/api/setRealName",
