@@ -21,7 +21,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res) {
-    Player.register(new Player({ username: req.body.username, realname: '' }),
+    Player.register(new Player({ username: req.body.username }),
         req.body.password, function (err, user) {
             if (err) {
                 res.json({ status: false, message: err.toString() });

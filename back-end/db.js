@@ -6,7 +6,8 @@ require("dotenv").config({ silent: true });
 
 const Player = new mongoose.Schema({
   username: {type: String, required: true},
-  password: String,
+  salt: String,
+  hash: String,
   realname: String,
   team: String,
 }, );
@@ -15,6 +16,7 @@ const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
 	players: [String],
+  matches: [{type: mongoose.Schema.Types.ObjectId, ref:'Match'}],
 	createdAt: Date
 });
 
