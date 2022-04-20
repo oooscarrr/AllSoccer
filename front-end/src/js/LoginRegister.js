@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Navigate } from "react-router-dom";
 const axios = require('axios');
 
 
@@ -6,6 +7,8 @@ const LoginRegister = (props) => {
     useEffect(() => {
         document.title = props.title || "";
     }, [props.title]);
+    
+    const [userOn, setUserOn] = useState(false);
 
     const handleLogin = async e => {
         e.preventDefault()
@@ -25,6 +28,7 @@ const LoginRegister = (props) => {
             if (response.data.status) {
                 alert(response.data.message);
                 props.setUser(response.data.user);
+                setUserOn(true);
             }
             else {
                 alert(response.data.message);
@@ -55,7 +59,9 @@ const LoginRegister = (props) => {
                 },
             });
             if (response.data.status) {
-                alert('Success');
+                alert(response.data.message);
+                setUserOn(true);
+                props.setUser(response.data.user);
             }
             else {
                 alert(response.data.message);
@@ -64,6 +70,10 @@ const LoginRegister = (props) => {
         catch (err) {
             console.log(err);
         }
+    }
+
+    if (userOn) {
+        return <Navigate to='/profile'/>
     }
 
     return (

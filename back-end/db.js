@@ -10,6 +10,7 @@ const Player = new mongoose.Schema({
   hash: String,
   realname: String,
   team: String,
+  ismanager: Boolean
 }, );
 
 const Team = new mongoose.Schema({

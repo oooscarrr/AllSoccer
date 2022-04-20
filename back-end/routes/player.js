@@ -28,7 +28,7 @@ router.post('/register', function (req, res) {
             }
             else {
                 passport.authenticate('local')(req, res, function () {
-                    res.json({ status: true, user: user });
+                    res.json({ status: true, user: user, message: 'Login success.'});
                 });
             }
         });

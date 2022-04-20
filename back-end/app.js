@@ -34,11 +34,6 @@ const playerRoutes = require('./routes/player');
 app.use('/api', playerRoutes);
 
 
-app.get("/api/home", (req, res) => {
-  res.send('This is homepage');
-});
-
-
   
 const PORT = process.env.PORT || 8080;
   

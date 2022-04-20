@@ -15,11 +15,11 @@ const App = (props) => {
     <div className="App">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <Router>
-        <Header />
+        <Header user={user}/>
         <Routes>
           {/*home page*/}
-          <Route path="/" element={<Home title="Home | All Soccer"/>}/>
-          <Route path="/playerProfile" element={<PlayerProfile title="Player Profile | All Soccer" user={user} setUser={setUser}/>}/>
+          <Route path="/" element={<Home title="Home | All Soccer" user={user}/>}/>
+          <Route path="/profile" element={<PlayerProfile title="Profile | All Soccer" user={user} setUser={setUser}/>}/>
           <Route path="/loginRegister" element={<LoginRegister title="Login/Register | All Soccer" user={user} setUser={setUser}/>}/>
         </Routes>
       </Router>

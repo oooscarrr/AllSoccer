@@ -1,0 +1,29 @@
+.PlayerProfile > * {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ButtonWrapper {
+    text-align: center;
+    margin: 0 auto;
+    height: 30px;
+    width: 100px;
+}
+
+.ButtonWrapper > * {
+    display: inline-block;
+}
+
+.Button {
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px black solid;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
