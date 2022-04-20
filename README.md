@@ -3,6 +3,9 @@
 ## Milestone 2
 You can register, login and change your real name.
 
+## Milestone 3
+You can create a team given its name, location based and several players. Team info not yet displayed except for its name in the profile of player who created the team. But the info is stored in database.
+
 ## Overview
 
 Soccer enthusiats in NYC usually engage in the sport by playing pick-up games with random others(lower level), friendly matches between teams(medium level), and organized tournaments(higher level). Currently, there is no consistently operating website exclusive for amateur soccer teams to connect with each other.
