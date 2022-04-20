@@ -20,18 +20,17 @@ router.post('/login', function (req, res, next) {
     })(req, res, next);
 });
 
-router.post('/register', function (req, res) {
-    Player.register(new Player({ username: req.body.username }),
-        req.body.password, function (err, user) {
-            if (err) {
-                res.json({ status: false, message: err.toString() });
-            }
-            else {
-                passport.authenticate('local')(req, res, function () {
-                    res.json({ status: true, user: user, message: 'Login success.'});
-                });
-            }
-        });
+router.post('/register', async function (req, res) {
+    Player.register(new Player({ username: req.body.username }), req.body.password, function (err, user) {
+        if (err) {
+            res.json({ status: false, message: err.toString() });
+        }
+        else {
+            passport.authenticate('local')(req, res, function () {
+                res.json({ status: true, user: user, message: 'Register success.'});
+            });
+        }
+    });
 });
 
 router.post('/setRealName', async (req, res) => {
@@ -44,8 +43,5 @@ router.post('/setRealName', async (req, res) => {
     }
 });
 
-router.get("/playerProfile", (req, res) => {
-    res.send('Oscar3');
-});
 
 module.exports = router;

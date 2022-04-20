@@ -16,9 +16,10 @@ const Player = new mongoose.Schema({
 const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
+  location: String,
 	players: [String],
   matches: [{type: mongoose.Schema.Types.ObjectId, ref:'Match'}],
-	createdAt: Date
+	createdAt: String
 });
 
 

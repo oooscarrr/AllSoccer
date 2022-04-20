@@ -73,7 +73,7 @@ const LoginRegister = (props) => {
     }
 
     if (userOn) {
-        return <Navigate to='/profile'/>
+        return <Navigate to='/profile'/>;
     }
 
     return (

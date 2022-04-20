@@ -33,6 +33,8 @@ app.use((req, res, next) => {
 const playerRoutes = require('./routes/player');
 app.use('/api', playerRoutes);
 
+const teamRoutes = require('./routes/team');
+app.use('/api', teamRoutes);
 
   
 const PORT = process.env.PORT || 8080;
