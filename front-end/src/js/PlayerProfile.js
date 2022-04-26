@@ -57,6 +57,6 @@ const PlayerProfile = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default PlayerProfile;

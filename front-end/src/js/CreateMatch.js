@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+// import { NavLink, Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import '../css/CreateMatch.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,7 @@ const CreateMatch = (props) => {
         document.title = props.title || "";
     }, [props.title]);
 
-    const [startDate, setStartDate] = useState(null);
+    const [sinceDate, setSinceDate] = useState(null);
 
     const handleCreate = async e => {
         e.preventDefault();
@@ -23,9 +23,9 @@ const CreateMatch = (props) => {
             data: {
                 'city': matchCity,
                 'location': matchLocation,
-                'date': startDate,
+                'date': sinceDate,
                 'homeTeam': props.user.team
-            },
+            }
         });
         alert(new Date(response.data.date));
     };
@@ -36,7 +36,7 @@ const CreateMatch = (props) => {
             <form onSubmit={handleCreate}>
                 <div className='formWrapper'>
                     <div className='datetime'>
-                        Date and Time:<DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholderText='Select Date' 
+                        Date and Time:<DatePicker selected={sinceDate} onChange={(date) => setSinceDate(date)} placeholderText='Select Date' 
                         excludeOutOfBoundsTimes showTimeSelect minDate={new Date()} dateFormat="Pp" popperPlacement="auto"/>
                     </div>
                     <div>
@@ -51,7 +51,7 @@ const CreateMatch = (props) => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default CreateMatch;

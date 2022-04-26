@@ -44,5 +44,10 @@ router.post('/createTeam', async (req, res) => {
     }
 });
 
+router.post('/getTeam', async (req, res) => {
+    const theTeam = await Team.findOne({name: req.body.name});
+    res.send(theTeam);
+});
+
 
 module.exports = router;

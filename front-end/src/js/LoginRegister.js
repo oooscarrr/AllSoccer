@@ -10,6 +10,15 @@ const LoginRegister = (props) => {
     
     const [userOn, setUserOn] = useState(false);
 
+    const getTeam = async (teamName) => {
+        const response = await axios({
+            method: 'post',
+            url: 'api/getTeam',
+            data: {name: teamName}
+        });
+        props.setTeam(response.data);
+    }
+
     const handleLogin = async e => {
         e.preventDefault()
         // get the username and password from the form fields
@@ -28,6 +37,9 @@ const LoginRegister = (props) => {
             if (response.data.status) {
                 alert(response.data.message);
                 props.setUser(response.data.user);
+                if (response.data.user.team) {
+                    getTeam(response.data.user.team);
+                }
                 setUserOn(true);
             }
             else {

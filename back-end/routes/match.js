@@ -6,7 +6,7 @@ const Match = mongoose.model('Match');
 
 router.post('/createMatch', async (req, res) => {
     const newMatch = await Match.create({
-        teams: [req.body.homeTeam, ''],
+        teams: [req.body.homeTeam],
         date: req.body.date,
         city: req.body.city,
         location: req.body.location,
@@ -25,6 +25,11 @@ router.post('/createMatch', async (req, res) => {
             message: 'Something Wrong!'
         });
     }
+});
+
+router.get('/getAvailableMatches', async (req, res) => {
+    const availableMatches = await Match.find({teams: {$size: 1}});
+    res.send(availableMatches);
 });
 
 
