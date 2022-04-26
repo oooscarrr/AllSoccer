@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import '../css/PlayerProfile.css';
 const axios = require('axios');
 
@@ -28,7 +28,11 @@ const PlayerProfile = (props) => {
         else {
             alert(response.data.message);
         }
-    }
+    };
+
+    const logOut = () => {
+        setUser(null);
+    };
 
     return (
         <div className='PlayerProfile'>
@@ -48,8 +52,11 @@ const PlayerProfile = (props) => {
             <div className='Stats'>
 
             </div>
+            <div className='ButtonWrapper'>
+                <Link className='Button' to='/' onClick={() => logOut()}>Log Out</Link>
+            </div>
         </div>
-    )
+    );
 }
 
 export default PlayerProfile;

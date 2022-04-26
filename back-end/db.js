@@ -10,24 +10,29 @@ const Player = new mongoose.Schema({
   hash: String,
   realname: String,
   team: String,
-  ismanager: Boolean
+  isManager: Boolean,
+  goal: Number,
+  assist: Number,
 }, );
 
 const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
-  location: String,
+  city: String,
 	players: [String],
   matches: [{type: mongoose.Schema.Types.ObjectId, ref:'Match'}],
-	createdAt: String
+	createdAt: String,
+  invitations: [String],
+  requests: [String]
 });
 
 
 const Match = new mongoose.Schema({
   teams: [String],
-  dateTime: Date,
+  date: Date,
+  city: String,
   location: String,
-  status: {type: String, required: true}
+  status: {type: Number, required: true} //0 for upcoming, 1 for playing, 2 for past
 });
 
 

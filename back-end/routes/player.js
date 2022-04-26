@@ -21,7 +21,14 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/register', async function (req, res) {
-    Player.register(new Player({ username: req.body.username }), req.body.password, function (err, user) {
+    const newPlayer = {
+        username: req.body.username,
+        isManager: false,
+        goal: 0,
+        assist: 0,
+        realname: 'Anonymous'
+    };
+    Player.register(new Player(newPlayer), req.body.password, function (err, user) {
         if (err) {
             res.json({ status: false, message: err.toString() });
         }

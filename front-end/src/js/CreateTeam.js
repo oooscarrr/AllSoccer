@@ -22,8 +22,8 @@ const CreateTeam = (props) => {
             data: {
                 'username': user.username,
                 'teamName': e.target.teamname.value,
-                'location': e.target.location.value,
-                'players': e.target.players.value.split(','),
+                'city': e.target.city.value,
+                'players': e.target.players.value.split(',').map(pl => pl.trim()),
                 'createDate': todayString
             }
         });
@@ -48,7 +48,7 @@ const CreateTeam = (props) => {
                     Team Name:<input type="text" name="teamname"/>
                 </div>
                 <div>
-                    Location:<input type="text" name="location"/>
+                    City:<input type="text" name="city"/>
                 </div>
                 <div>
                     Players:<input type="text" placeholder='Seperate With Comma' name="players"/>

@@ -14,12 +14,19 @@ router.post('/createTeam', async (req, res) => {
     else {
         const newTeam = await Team.create({
             name: req.body.teamName,
-            location: req.body.location,
+            city: req.body.city,
             manager: req.body.username,
             players: req.body.players,
-            createdAt: req.body.createDate
+            createdAt: req.body.createDate,
+            matches: [],
+            invitations: [],
+            requests: []
         });
-        const manager = await Player.findOneAndUpdate({username: req.body.username}, {team: req.body.teamName}, {new: true});
+        const changes = {
+            team: req.body.teamName,
+            isManager: true
+        };
+        const manager = await Player.findOneAndUpdate({username: req.body.username}, changes, {new: true});
         if (manager) {
             res.json({
                 status: true,
