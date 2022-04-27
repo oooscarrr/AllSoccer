@@ -41,7 +41,7 @@ const CreateTeam = (props) => {
         return <Navigate to='/profile'/>;
     }
     return (
-        <div>
+        <div className='CreateTeam'>
             <h1>Create Your Own Team</h1>
             <form onSubmit={handleCreate}>
                 <div>

@@ -28,6 +28,7 @@ router.post('/createMatch', async (req, res) => {
 });
 
 router.get('/getAvailableMatches', async (req, res) => {
+    //find matches with only one team that is not user's own team
     const availableMatches = (await Match.find({teams: {$size: 1}})).filter(match => match.teams[0] !== req.query.ownTeam);
     res.send(availableMatches);
 });

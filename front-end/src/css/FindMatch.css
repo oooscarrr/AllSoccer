@@ -1,4 +1,16 @@
+.FindMatch {
+    margin-top: 50px;
+}
+
 .table {
     margin-left: auto;
     margin-right: auto;
+}
+
+.ItemRow > td {
+    padding: 20px;
+}
+
+.AcceptButton {
+    margin: 20px;
 }

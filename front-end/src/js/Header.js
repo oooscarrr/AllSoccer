@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../css/Header.css';
 
 const Header = (props) => {
-    // const [profileButtonTo, setProfileButtonTo] = props.user ? '/profile' : '/loginRegister';
-    // const [profileButtonTo, setProfileButtonTo] = useState('/loginRegister');
-
     return (
         <table className="Header">
             <tbody>

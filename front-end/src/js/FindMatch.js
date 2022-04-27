@@ -25,13 +25,13 @@ const OpponentItem = (props) => {
     };
 
     return (
-        <tr>
+        <tr className='ItemRow'>
             <td>{props.theMatch.teams[0]}</td>
             <td>{new Date(props.theMatch.date).toDateString()}</td>
-            <td>{new Date(props.theMatch.date).toTimeString().slice(0, 8)}</td>
+            <td>{new Date(props.theMatch.date).toTimeString().slice(0, 5)}</td>
             <td>{props.theMatch.city}</td>
             <td>{props.theMatch.location}</td>
-            {props.user.isManager ? <button onClick={acceptMatch}>Accept</button> : <td></td>}
+            {props.user.isManager ? <button className='AcceptButton' onClick={acceptMatch}>Accept</button> : <td></td>}
         </tr>
     )
 };
@@ -42,18 +42,18 @@ const FindMatch = (props) => {
     }, [props.title]);
 
     const [availableMatches, setAvailableMatches] = useState([]);
-    const getAvailableMatches = async () => {
-        const response = await axios('api/getAvailableMatches', {params: {ownTeam: props.team.name}});
-        if (response.data) {
-            setAvailableMatches(response.data);
-        }
-        else {
-            alert('Error finding available matches!');
-        }
-    };
     useEffect(() => {
+        const getAvailableMatches = async () => {
+            const response = await axios('api/getAvailableMatches', {params: {ownTeam: props.team.name}});
+            if (response.data) {
+                setAvailableMatches(response.data);
+            }
+            else {
+                alert('Error finding available matches!');
+            }
+        };
         getAvailableMatches();
-    });
+    }, [props.team]);
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(null);
@@ -79,7 +79,7 @@ const FindMatch = (props) => {
     };
 
     return (
-        <div>
+        <div className='FindMatch'>
             <h1>Get an Opponent</h1>
             <form onSubmit={handleFilter}>
                 From <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} 
@@ -91,7 +91,7 @@ const FindMatch = (props) => {
             </form>
             <table className='table'>
                 <thead>
-                    <tr>
+                    <tr className='ItemRow'>
                         <th>Team</th>
                         <th>Date</th>
                         <th>Time</th>

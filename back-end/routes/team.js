@@ -17,8 +17,7 @@ router.post('/createTeam', async (req, res) => {
             isManager: true
         };
         const manager = await Player.findOneAndUpdate({username: req.body.username}, changes, {new: true});
-
-        const initialPlayers = await Player.find({username: {$in: req.body.players}});
+        const initialPlayers = await Player.find({username: {$in: req.body.players}, team: null});
         for (const player of initialPlayers) {
             player.team = req.body.teamName;
             player.save((err) => {

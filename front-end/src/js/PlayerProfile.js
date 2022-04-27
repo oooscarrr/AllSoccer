@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../css/PlayerProfile.css';
 const axios = require('axios');
 
@@ -22,7 +22,7 @@ const PlayerProfile = (props) => {
             },
         });
         if (response.data.status) {
-            alert('Success');
+            alert('Set name success');
             setUser(response.data.user);
         }
         else {
@@ -36,13 +36,15 @@ const PlayerProfile = (props) => {
 
     return (
         <div className='PlayerProfile'>
-            <h1>Username: {user? user.username : 'nothing'}</h1>
-            <h1>Real Name: {user? user.realname : 'nothing'}</h1>
+            <h1>{user.realname}</h1>
+            <div>username: {user.username}</div>
             <form onSubmit={setRealName}>
                 <input type="text" placeholder={'Your real name'} name="realname"/>
                 <input type="submit" value="submit"/>
             </form>
-            {user.team ? <h1>Team: {user.team}</h1>
+            {user.team ? <h1>
+                <NavLink className='TeamButton' to='/teamProfile'>{user.team}</NavLink>
+            </h1>
             : <div className='ButtonWrapper'>
                 <NavLink className='Button' to='/createTeam'>Create Team</NavLink>
                  <text>or</text>
@@ -50,10 +52,11 @@ const PlayerProfile = (props) => {
             </div>
             }
             <div className='Stats'>
-
+                <div>&#9917;Goals: {user.goal}</div>
+                <div>&#127919;Assists: {user.assist}</div>
             </div>
             <div className='ButtonWrapper'>
-                <Link className='Button' to='/' onClick={() => logOut()}>Log Out</Link>
+                <NavLink className='Button' to='/' onClick={() => logOut()}>Log Out</NavLink>
             </div>
         </div>
     );
