@@ -12,21 +12,31 @@ router.post('/createTeam', async (req, res) => {
         });
     }
     else {
-        const newTeam = await Team.create({
-            name: req.body.teamName,
-            city: req.body.city,
-            manager: req.body.username,
-            players: req.body.players,
-            createdAt: req.body.createDate,
-            matches: [],
-            invitations: [],
-            requests: []
-        });
         const changes = {
             team: req.body.teamName,
             isManager: true
         };
         const manager = await Player.findOneAndUpdate({username: req.body.username}, changes, {new: true});
+
+        const initialPlayers = await Player.find({username: {$in: req.body.players}});
+        for (const player of initialPlayers) {
+            player.team = req.body.teamName;
+            player.save((err) => {
+                if (err) {console.log(err);}
+            });
+        }
+        initialPlayers.push(manager);
+        const newTeam = await Team.create({
+            name: req.body.teamName,
+            city: req.body.city,
+            manager: req.body.username,
+            players: initialPlayers,
+            createdAt: req.body.createDate,
+            matches: [],
+            invitations: [],
+            requests: []
+        });
+        
         if (manager) {
             res.json({
                 status: true,
@@ -44,8 +54,8 @@ router.post('/createTeam', async (req, res) => {
     }
 });
 
-router.post('/getTeam', async (req, res) => {
-    const theTeam = await Team.findOne({name: req.body.name});
+router.get('/getTeam', async (req, res) => {
+    const theTeam = await Team.findOne({name: req.query.name});
     res.send(theTeam);
 });
 

@@ -5,13 +5,33 @@ import '../css/FindMatch.css';
 const axios = require('axios');
 
 const OpponentItem = (props) => {
+    const acceptMatch = async () => {
+        if (window.confirm(props.teamName + 'Play against ' + props.theMatch.teams[0] + '?')) {
+            const response = await axios({
+                method: 'post',
+                url: 'api/acceptMatch',
+                data: {
+                    'id': props.theMatch._id,
+                    'teamName': props.teamName
+                }
+            });
+            if (response.data) {
+                alert("Match added to both teams' schedules!");
+            }
+            else {
+                alert("error!");
+            }
+        }
+    };
+
     return (
         <tr>
-            <td>{props.teamName}</td>
-            <td>{props.date}</td>
-            <td>{props.time}</td>
-            <td>{props.city}</td>
-            <td>{props.location}</td>
+            <td>{props.theMatch.teams[0]}</td>
+            <td>{new Date(props.theMatch.date).toDateString()}</td>
+            <td>{new Date(props.theMatch.date).toTimeString().slice(0, 8)}</td>
+            <td>{props.theMatch.city}</td>
+            <td>{props.theMatch.location}</td>
+            {props.user.isManager ? <button onClick={acceptMatch}>Accept</button> : <td></td>}
         </tr>
     )
 };
@@ -23,7 +43,7 @@ const FindMatch = (props) => {
 
     const [availableMatches, setAvailableMatches] = useState([]);
     const getAvailableMatches = async () => {
-        const response = await axios('api/getAvailableMatches');
+        const response = await axios('api/getAvailableMatches', {params: {ownTeam: props.team.name}});
         if (response.data) {
             setAvailableMatches(response.data);
         }
@@ -60,7 +80,7 @@ const FindMatch = (props) => {
 
     return (
         <div>
-            <h1>Match Lobby</h1>
+            <h1>Get an Opponent</h1>
             <form onSubmit={handleFilter}>
                 From <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} 
                 showTimeSelect minDate={new Date()} dateFormat="Pp" popperPlacement="auto"/>
@@ -80,8 +100,7 @@ const FindMatch = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredMatches.map(match => <OpponentItem teamName={match.teams[0]} date={new Date(match.date).toDateString()}
-                    time={new Date(match.date).toTimeString()} city={match.city} location={match.location}/>)}
+                    {filteredMatches.map(match => <OpponentItem theMatch={match} teamName={props.team.name} user={props.user}/>)}
                 </tbody>
             </table>
         </div>

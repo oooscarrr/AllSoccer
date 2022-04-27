@@ -19,7 +19,7 @@ const Team = new mongoose.Schema({
 	name: {type: String, required: true},
 	manager: {type: String, required: true},
   city: String,
-	players: [String],
+	players: [{type: mongoose.Schema.Types.ObjectId, ref:'Player'}],
   matches: [{type: mongoose.Schema.Types.ObjectId, ref:'Match'}],
 	createdAt: String,
   invitations: [String],

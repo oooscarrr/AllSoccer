@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import { NavLink, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import '../css/CreateMatch.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +12,7 @@ const CreateMatch = (props) => {
     }, [props.title]);
 
     const [sinceDate, setSinceDate] = useState(null);
+    const [created, setCreated] = useState(false);
 
     const handleCreate = async e => {
         e.preventDefault();
@@ -27,8 +28,18 @@ const CreateMatch = (props) => {
                 'homeTeam': props.user.team
             }
         });
-        alert(new Date(response.data.date));
+        if (response.data) {
+            alert('New match invitation at ' + new Date(response.data.date));
+            setCreated(true);
+        }
+        else {
+            alert('Fail to create match');
+        }
     };
+
+    if (created) {
+        return <Navigate to='/'/>;
+    }
 
     return (
         <div className='CreateMatch'>

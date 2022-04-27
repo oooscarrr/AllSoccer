@@ -11,11 +11,12 @@ const LoginRegister = (props) => {
     const [userOn, setUserOn] = useState(false);
 
     const getTeam = async (teamName) => {
-        const response = await axios({
-            method: 'post',
-            url: 'api/getTeam',
-            data: {name: teamName}
-        });
+        // const response = await axios({
+        //     method: 'get',
+        //     url: 'api/getTeam',
+        //     data: {name: teamName}
+        // });
+        const response = await axios('api/getTeam', {params: {name: teamName}})
         props.setTeam(response.data);
     }
 
