@@ -33,7 +33,8 @@ router.post('/createTeam', async (req, res) => {
             createdAt: req.body.createDate,
             matches: [],
             invitations: [],
-            requests: []
+            requests: [],
+            history: [0, 0, 0]
         });
         
         if (manager) {
@@ -47,7 +48,7 @@ router.post('/createTeam', async (req, res) => {
         else {
             res.json({
                 status: false,
-                message: 'Something wrong'
+                message: 'Something wrong with creating team'
             });
         }
     }

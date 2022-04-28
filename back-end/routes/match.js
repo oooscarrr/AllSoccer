@@ -10,7 +10,8 @@ router.post('/createMatch', async (req, res) => {
         date: req.body.date,
         city: req.body.city,
         location: req.body.location,
-        status: 0
+        status: 0,
+        score: []
     });
     if (newMatch) {
         res.json({

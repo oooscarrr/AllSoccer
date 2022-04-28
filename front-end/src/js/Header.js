@@ -17,7 +17,7 @@ const Header = (props) => {
                             All Soccer
                         </NavLink>
                     </td>
-                    <td className='UserProfileButtonWrapper'>
+                    <td className='ProfileButtonWrapper'>
                         {props.user ?
                             <NavLink className='ProfileButton' to='/profile'>
                                 Profile

@@ -11,6 +11,7 @@ const Player = new mongoose.Schema({
   realname: String,
   team: String,
   isManager: Boolean,
+  number: Number,
   goal: Number,
   assist: Number,
 }, );
@@ -23,7 +24,8 @@ const Team = new mongoose.Schema({
   matches: [{type: mongoose.Schema.Types.ObjectId, ref:'Match'}],
 	createdAt: String,
   invitations: [String],
-  requests: [String]
+  requests: [String],
+  history: [Number]
 });
 
 
@@ -32,7 +34,8 @@ const Match = new mongoose.Schema({
   date: Date,
   city: String,
   location: String,
-  status: {type: Number, required: true} //0 for upcoming, 1 for playing, 2 for past
+  status: {type: Number, required: true}, //0 for upcoming, 1 for playing, 2 for past
+  score: [Number]
 });
 
 

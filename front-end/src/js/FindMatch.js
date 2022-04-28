@@ -33,7 +33,7 @@ const OpponentItem = (props) => {
             <td>{props.theMatch.location}</td>
             {props.user.isManager ? <button className='AcceptButton' onClick={acceptMatch}>Accept</button> : <td></td>}
         </tr>
-    )
+    );
 };
 
 const FindMatch = (props) => {

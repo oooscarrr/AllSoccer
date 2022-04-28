@@ -30,6 +30,10 @@ const PlayerProfile = (props) => {
         }
     };
 
+    const showTeam = () => {
+        props.setTeamToShow(props.team);
+    }
+
     const logOut = () => {
         setUser(null);
     };
@@ -43,7 +47,7 @@ const PlayerProfile = (props) => {
                 <input type="submit" value="submit"/>
             </form>
             {user.team ? <h1>
-                <NavLink className='TeamButton' to='/teamProfile'>{user.team}</NavLink>
+                <NavLink className='TeamButton' to='/teamProfile' onClick={() => showTeam()}>{user.team}</NavLink>
             </h1>
             : <div className='ButtonWrapper'>
                 <NavLink className='Button' to='/createTeam'>Create Team</NavLink>

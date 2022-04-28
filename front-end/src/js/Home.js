@@ -10,7 +10,7 @@ const Home = (props) => {
     return (
         <div>
             <div className='HomeButtonWrapper'>
-                <NavLink className='HomeButton' to='/search'>Search Team/Player</NavLink>
+                <NavLink className='HomeButton' to='/search'>Search Team</NavLink>
             </div>
             <div className='HomeButtonWrapper'>
                 <NavLink className='HomeButton' to='/findMatch'>Find a Match</NavLink>

@@ -9,6 +9,7 @@ const CreateTeam = (props) => {
     }, [props.title]);
 
     const user = props.user, setUser = props.setUser;
+    const setTeam = props.setTeam;
     const [created, setCreated] = useState(false);
 
     const handleCreate = async e => {
@@ -29,6 +30,7 @@ const CreateTeam = (props) => {
         });
         if (response.data.status) {
             setUser(response.data.user);
+            setTeam(response.data.team);
             alert(response.data.message);
             setCreated(true);
         }
@@ -59,6 +61,6 @@ const CreateTeam = (props) => {
             </form>
         </div>
     );
-}
+};
 
 export default CreateTeam;
