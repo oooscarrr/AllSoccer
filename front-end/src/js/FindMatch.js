@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
 // import { NavLink, Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import { Navigate } from 'react-router-dom';
 import '../css/FindMatch.css';
 const axios = require('axios');
 
 const OpponentItem = (props) => {
     const acceptMatch = async () => {
-        if (window.confirm(props.teamName + 'Play against ' + props.theMatch.teams[0] + '?')) {
+        if (window.confirm('Play against ' + props.theMatch.teams[0] + '?')) {
             const response = await axios({
                 method: 'post',
-                url: 'api/acceptMatch',
+                url: '/api/acceptMatch',
                 data: {
                     'id': props.theMatch._id,
                     'teamName': props.teamName
@@ -17,6 +18,8 @@ const OpponentItem = (props) => {
             });
             if (response.data) {
                 alert("Match added to both teams' schedules!");
+                //return to home page
+                props.setAccepted(true);
             }
             else {
                 alert("error!");
@@ -78,6 +81,17 @@ const FindMatch = (props) => {
         }));
     };
 
+    const getTeam = async (teamName) => {
+        const response = await axios('api/getTeam', {params: {name: teamName}})
+        props.setTeam(response.data);
+    }
+
+    const [accepted, setAccepted] = useState(false);
+    if (accepted) {
+        getTeam(props.team.name);
+        return <Navigate to='/'/>;
+    }
+
     return (
         <div className='FindMatch'>
             <h1>Get an Opponent</h1>
@@ -100,7 +114,7 @@ const FindMatch = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredMatches.map(match => <OpponentItem theMatch={match} teamName={props.team.name} user={props.user}/>)}
+                    {filteredMatches.map(match => <OpponentItem theMatch={match} teamName={props.team.name} user={props.user} setAccepted={setAccepted}/>)}
                 </tbody>
             </table>
         </div>

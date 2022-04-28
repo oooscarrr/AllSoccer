@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Match = mongoose.model('Match');
 const Team = mongoose.model('Team');
 
+
 router.post('/createMatch', async (req, res) => {
     const newMatch = await Match.create({
         teams: [req.body.homeTeam],
@@ -28,11 +29,13 @@ router.post('/createMatch', async (req, res) => {
     }
 });
 
+
 router.get('/getAvailableMatches', async (req, res) => {
     //find matches with only one team that is not user's own team
     const availableMatches = (await Match.find({teams: {$size: 1}})).filter(match => match.teams[0] !== req.query.ownTeam);
     res.send(availableMatches);
 });
+
 
 router.post('/acceptMatch', async (req, res) => {
     let result = true;
@@ -63,6 +66,11 @@ router.post('/acceptMatch', async (req, res) => {
     });
 
     res.send(result);
+});
+
+router.get('/getFixture', async (req, res) => {
+    const theFixture = await Match.find({_id: {$in: req.query.matchIDs}});
+    res.send(theFixture);
 });
 
 

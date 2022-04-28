@@ -1,3 +1,17 @@
 .TeamProfile {
     margin-top: 50px;
 }
+
+.RosterAndFixture > * {
+    display: inline-block;
+    margin: 60px;
+}
+
+.ItemRow > td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.TableTitle {
+    font-size: 30px;
+}

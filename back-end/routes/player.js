@@ -20,6 +20,7 @@ router.post('/login', function (req, res, next) {
     })(req, res, next);
 });
 
+
 router.post('/register', async function (req, res) {
     const newPlayer = {
         username: req.body.username,
@@ -40,6 +41,7 @@ router.post('/register', async function (req, res) {
     });
 });
 
+
 router.post('/setRealName', async (req, res) => {
     const theUser = await Player.findOneAndUpdate({username: req.body.username}, {realname: req.body.realname}, {new: true});
     if (theUser) {
@@ -48,6 +50,12 @@ router.post('/setRealName', async (req, res) => {
     else {
         res.json({status: false, message: 'error!'});
     }
+});
+
+
+router.get('/getRoster', async (req, res) => {
+    const theRoster = await Player.find({_id: {$in: req.query.playerIDs}});
+    res.send(theRoster);
 });
 
 

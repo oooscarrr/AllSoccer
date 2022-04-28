@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Team = mongoose.model('Team');
 const Player = mongoose.model('Player');
 
+
 router.post('/createTeam', async (req, res) => {
     if (await Team.findOne({name: req.body.teamName})) {
         res.json({
@@ -53,6 +54,7 @@ router.post('/createTeam', async (req, res) => {
         }
     }
 });
+
 
 router.get('/getTeam', async (req, res) => {
     const theTeam = await Team.findOne({name: req.query.name});
