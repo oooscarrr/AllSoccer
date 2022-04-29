@@ -27,6 +27,7 @@ router.post('/register', async function (req, res) {
         isManager: false,
         goal: 0,
         assist: 0,
+        number: 0,
         realname: 'Anonymous'
     };
     Player.register(new Player(newPlayer), req.body.password, function (err, user) {

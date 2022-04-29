@@ -1,0 +1,12 @@
+.SearchTeam {
+    margin-top: 50px;
+}
+
+.TeamRow > td {
+    padding: 20px;
+    border: 1px solid black;
+}
+
+button {
+    margin: 20px;
+}

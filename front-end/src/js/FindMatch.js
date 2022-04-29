@@ -28,7 +28,7 @@ const OpponentItem = (props) => {
     };
 
     return (
-        <tr className='ItemRow'>
+        <tr className='OpponentRow'>
             <td>{props.theMatch.teams[0]}</td>
             <td>{new Date(props.theMatch.date).toDateString()}</td>
             <td>{new Date(props.theMatch.date).toTimeString().slice(0, 5)}</td>
@@ -55,7 +55,9 @@ const FindMatch = (props) => {
                 alert('Error finding available matches!');
             }
         };
-        getAvailableMatches();
+        if (props.team) {
+            getAvailableMatches();
+        }
     }, [props.team]);
 
     const [startDate, setStartDate] = useState(new Date());
@@ -92,6 +94,10 @@ const FindMatch = (props) => {
         return <Navigate to='/'/>;
     }
 
+    if (!props.user) {
+        return <Navigate to='/loginRegister'/>;
+    }
+
     return (
         <div className='FindMatch'>
             <h1>Get an Opponent</h1>
@@ -105,16 +111,17 @@ const FindMatch = (props) => {
             </form>
             <table className='table'>
                 <thead>
-                    <tr className='ItemRow'>
-                        <th>Team</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>City</th>
-                        <th>Location</th>
+                    <tr className='OpponentRow'>
+                        <td>Team</td>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>City</td>
+                        <td>Location</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredMatches.map(match => <OpponentItem theMatch={match} teamName={props.team.name} user={props.user} setAccepted={setAccepted}/>)}
+                    {filteredMatches.map(match => <OpponentItem theMatch={match} teamName={props.team.name} 
+                    user={props.user} setAccepted={setAccepted} key={match._id}/>)}
                 </tbody>
             </table>
         </div>

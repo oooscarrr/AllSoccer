@@ -10,11 +10,13 @@ import CreateTeam from "./js/CreateTeam";
 import CreateMatch from "./js/CreateMatch";
 import FindMatch from "./js/FindMatch";
 import TeamProfile from "./js/TeamProfile";
+import SearchTeam from "./js/SearchTeam";
 
 
 const App = (props) => {
   const [user, setUser] = useState(null);
   const [team, setTeam] = useState(null);
+  //Team to show at team profile page
   const [teamToShow, setTeamToShow] = useState(null);
 
   return (
@@ -30,7 +32,8 @@ const App = (props) => {
           <Route path="/createTeam" element={<CreateTeam title="Create Team | All Soccer" user={user} setUser={setUser}  setTeam={setTeam}/>}/>
           <Route path="/createMatch" element={<CreateMatch title="Create Match | All Soccer" user={user} setUser={setUser}/>}/>
           <Route path="/findMatch" element={<FindMatch title="Find Match | All Soccer" user={user} team={team} setTeam={setTeam}/>}/>
-          <Route path="/teamProfile" element={<TeamProfile title="Team | All Soccer" user={user} team={teamToShow}/>}/>
+          <Route path="/teamProfile" element={<TeamProfile title="Team | All Soccer" user={user} team={teamToShow} setTeam={setTeam}/>}/>
+          <Route path="/searchTeam" element={<SearchTeam title="Search | All Soccer" user={user} team={team} setTeamToShow={setTeamToShow}/>}/>
         </Routes>
       </Router>
     </div>

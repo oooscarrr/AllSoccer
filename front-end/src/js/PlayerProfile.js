@@ -52,7 +52,7 @@ const PlayerProfile = (props) => {
             : <div className='ButtonWrapper'>
                 <NavLink className='Button' to='/createTeam'>Create Team</NavLink>
                  <text>or</text>
-                 <NavLink className='Button' to='/search'>Find a Team</NavLink>
+                 <NavLink className='Button' to='/searchTeam'>Find a Team</NavLink>
             </div>
             }
             <div className='Stats'>

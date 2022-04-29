@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 // import { NavLink } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap';
+// import Button from 'react-bootstrap/Button';
+// import { Modal } from 'react-bootstrap';
+// import "bootstrap/dist/css/bootstrap.min.css";
 import '../css/TeamProfile.css';
 const axios = require('axios');
 
@@ -34,7 +36,7 @@ const TeamProfile = (props) => {
         document.title = props.title || "";
     }, [props.title]);
 
-    const team = props.team, user = props.user;
+    const team = props.team, setTeam = props.setTeam;
 
     const [roster, setRoster] = useState([]);
     useEffect(() => {
@@ -52,24 +54,62 @@ const TeamProfile = (props) => {
         const getFixture = async () => {
             const response = await axios('/api/getFixture', {params: {matchIDs: props.team.matches}});
             if (response.data) {
-                setFixture(response.data);
+                setFixture(response.data.sort((a, b) => a.date<=b.date ? 1 : -1));
             }
         };
         getFixture();
     }, [props.team]);
 
+    const handleAcceptJoin = async (acceptedName) => {
+        const response = await axios({
+            method: 'post',
+            url: '/api/acceptJoin',
+            data : {
+                playerUsername: acceptedName,
+                teamName: team.name
+            }
+        });
+        alert(response.data.message);
+        if (response.data.status) {
+            setTeam(response.data.team);
+        }
+    };
+    const handleDeclineJoin = async (declinedName) => {
+        const response = await axios({
+            method: 'post',
+            url: '/api/declineJoin',
+            data : {
+                playerUsername: declinedName,
+                teamName: team.name
+            }
+        });
+        alert(response.data.message);
+        if (response.data.status) {
+            setTeam(response.data.team);
+        }
+    };
+
+    // const [showEditStats, setShowEditStats] = useState(false);
+    // const openEditStats = () => setShowEditStats(true);
+    // const closeEditStats = () => setShowEditStats(false);
+    // const handleEditStats = () => {
+    //     if (props.user.isManager && props.user.team===props.team.name) {
+    //         openEditStats();
+    //     }
+    // };
+
     return (
         <div className='TeamProfile'>
             <h1>{team.name}</h1>
             <div>&#9996;W{team.history[0]}  &#128528;D{team.history[1]}  &#128557;L{team.history[2]}</div>
-            <div className='SomeButtons'>
+            {/* <div className='SomeButtons'>
                 {!user.team ? <div>
                     <button>Request to Join</button>
                 </div> : null}
                 {user.isManager && user.team !== team.name ? <div>
                     <button>Invite to Match</button>
                 </div> : null}
-            </div>
+            </div> */}
             <div className='RosterAndFixture'>
                 <div className='Roster'>
                     <text className='TableTitle'>Roster</text>
@@ -83,7 +123,7 @@ const TeamProfile = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {roster.map(pl => <PlayerItem player={pl}/>)}
+                            {roster.map(pl => <PlayerItem player={pl} key={pl._id}/>)}
                         </tbody>
                     </table>
                 </div>
@@ -99,11 +139,43 @@ const TeamProfile = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {fixture.map(mtch => <MatchItem match={mtch} ownTeam={props.team.name}/>)}
+                            {fixture.map(mtch => <MatchItem match={mtch} ownTeam={props.team.name} key={mtch._id}/>)}
                         </tbody>
                     </table>
                 </div>
             </div>
+            {props.user.isManager && props.user.team===props.team.name && props.team.requests.length ? 
+            <div className='JoinRequests'>
+                <text className='TableTitle'>Join Requests</text>
+                <table>
+                    <tbody>
+                        {team.requests.map(requestName => {
+                            return (
+                            <div>
+                                <text>{requestName}</text>
+                                <button className='AcceptDeclineButton' onClick={() => handleAcceptJoin(requestName)}>Accept</button>
+                                <button className='AcceptDeclineButton' onClick={() => handleDeclineJoin(requestName)}>Decline</button>
+                            </div>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div> : null}
+ 
+            {/* <Modal show={showEditStats} onHide={closeEditStats}>
+                <Modal.Header>
+                <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={closeEditStats}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={closeEditStats}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+            </Modal> */}
         </div>
     );
 };

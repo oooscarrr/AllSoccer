@@ -4,7 +4,7 @@
 
 .RosterAndFixture > * {
     display: inline-block;
-    margin: 60px;
+    margin: 40px;
 }
 
 .ItemRow > td {
@@ -14,4 +14,12 @@
 
 .TableTitle {
     font-size: 30px;
+}
+
+.JoinRequests > * {
+    margin: auto;
+}
+
+.AcceptDeclineButton {
+    margin: 5px;
 }
