@@ -1,11 +1,14 @@
 .Header {
-    text-align: center;
     width: 100%;
 }
 
 .Logo {
     width: 50px;
     height: 50px;
+}
+
+td {
+    text-align: center;
 }
 
 .BigTitle {
@@ -17,8 +20,6 @@
 
 .ProfileButton {
     padding: 10px;
-    width: 100%;
-    height: 100%;
     font-size: 30px;
     text-decoration: none;
     color: black;
@@ -27,7 +28,5 @@
 }
 
 .ProfileButtonWrapper {
-    /* border-radius: 5px;
-    border: 1px black solid; */
     width: 10%;
 }
