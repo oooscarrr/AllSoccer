@@ -92,7 +92,21 @@ router.post('/sendJoinRequest', async (req, res) => {
 router.post('/acceptJoin', async (req, res) => {
     const theTeam = await Team.findOne({name: req.body.teamName});
     const thePlayer = await Player.findOne({username: req.body.playerUsername});
-    theTeam.players.push(thePlayer);
+    let theMsg = '';
+    if (!thePlayer.team) {
+        theMsg = 'Success! New player joined your team';
+        theTeam.players.push(thePlayer);
+        thePlayer.team = req.body.teamName;
+        thePlayer.save((err) => {
+            if (err) {
+                console.log(err);
+                res.json({status: false, message: 'Error, can not edit player'});
+            }
+        });
+    }
+    else {
+        theMsg = 'The player already joined another team!';
+    }
     theTeam.requests.splice(theTeam.requests.indexOf(req.body.playerUsername), 1);
     theTeam.save((err) => {
         if (err) {
@@ -100,14 +114,8 @@ router.post('/acceptJoin', async (req, res) => {
             res.json({status: false, message: 'Error, can not edit team'});
         }
     });
-    thePlayer.team = req.body.teamName;
-    thePlayer.save((err) => {
-        if (err) {
-            console.log(err);
-            res.json({status: false, message: 'Error, can not edit player'});
-        }
-    });
-    res.json({status: true, message: 'Success! New player joined your team', team: theTeam});
+    
+    res.json({status: true, message: theMsg, team: theTeam});
 });
 
 
